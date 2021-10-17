@@ -6,4 +6,7 @@ public class Messages {
 	
 	//Account message
 	public static String accountListed = "Tüm hesaplar listelendi";
+	public static String accountAdded ="Hesap eklendi";
+	public static String accountUpdated = "Hesap güncellendi";
+	public static String accountDeleted = "Hesap güncellendi";
 }
