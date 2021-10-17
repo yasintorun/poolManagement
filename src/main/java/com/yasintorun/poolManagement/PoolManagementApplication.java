@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PoolManagementApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PoolManagementApplication.class, args);
+	
+		SpringApplication.run(PoolManagementApplication.class, args);			
 	}
 
 }
