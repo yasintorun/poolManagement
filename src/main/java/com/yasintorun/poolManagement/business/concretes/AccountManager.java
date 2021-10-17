@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yasintorun.poolManagement.business.abstracts.AccountService;
+import com.yasintorun.poolManagement.core.utilities.results.DataResult;
+import com.yasintorun.poolManagement.core.utilities.results.ErrorDataResult;
+import com.yasintorun.poolManagement.core.utilities.results.SuccessDataResult;
 import com.yasintorun.poolManagement.dataAccess.abstracts.AccountDao;
 import com.yasintorun.poolManagement.entities.concretes.Account;
 
@@ -18,10 +21,15 @@ public class AccountManager implements AccountService {
 		super();
 		this.accountDao = accountDao;
 	}
-
 	@Override
-	public List<Account> getAll() {
-		return this.accountDao.findAll();
+	public DataResult<List<Account>> getAll() {
+
+		List<Account> accounts = null;
+		try {
+			accounts = this.accountDao.findAll();
+		} catch(Exception e) {
+			return new ErrorDataResult<List<Account>>(null, "asd");
+		}
+		return new SuccessDataResult<List<Account>>(accounts, "Hesaplar listelendi");
 	}
-	
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yasintorun.poolManagement.business.abstracts.AccountService;
+import com.yasintorun.poolManagement.core.utilities.results.DataResult;
 import com.yasintorun.poolManagement.entities.concretes.Account;
 
 @RestController
@@ -22,7 +23,7 @@ public class AccountController {
 	}
 	
 	@GetMapping("getallaccounts")
-	public List<Account> getAll() {
+	public DataResult<List<Account>> getAll() {
 		return this.accountService.getAll();
 	}
 	
