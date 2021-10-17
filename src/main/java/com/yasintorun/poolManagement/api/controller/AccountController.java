@@ -1,19 +1,19 @@
 package com.yasintorun.poolManagement.api.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yasintorun.poolManagement.business.abstracts.AccountService;
-import com.yasintorun.poolManagement.core.utilities.results.DataResult;
 import com.yasintorun.poolManagement.entities.concretes.Account;
 
 @RestController
 @RequestMapping("api/accounts")
-public class AccountController {
+public class AccountController extends BaseController{
 	private AccountService accountService;
 	
 	@Autowired
@@ -23,8 +23,13 @@ public class AccountController {
 	}
 	
 	@GetMapping("/getallaccounts")
-	public DataResult<List<Account>> getAll() {
-		return this.accountService.getAll();
+	public ResponseEntity<?> getAll() {
+		return Ok(() ->this.accountService.getAll());
+	}
+	
+	@PostMapping("/addaccount")
+	public ResponseEntity<?> add(@RequestBody Account account) {
+		return Ok(() ->this.accountService.add(account));
 	}
 	
 }

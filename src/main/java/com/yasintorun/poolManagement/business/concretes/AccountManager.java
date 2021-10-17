@@ -28,38 +28,22 @@ public class AccountManager implements AccountService {
 	@Override
 	public DataResult<List<Account>> getAll() {
 		List<Account> accounts = null;
-		try {
-			accounts = this.accountDao.findAll();
-		} catch(Exception e) {
-			return new ErrorDataResult<List<Account>>(Messages.errorOccurred);
-		}
+		accounts = this.accountDao.findAll();
 		return new SuccessDataResult<List<Account>>(accounts, Messages.accountListed);
 	}
 	@Override
 	public DataResult<Account> add(Account entity) {
-		try {
-			Account addedAccount = this.accountDao.save(entity);
-			return new SuccessDataResult<Account>(addedAccount, Messages.accountAdded);
-		}catch(Exception e) {
-			return new ErrorDataResult<Account>(Messages.errorOccurred);
-		}
+		Account addedAccount = this.accountDao.save(entity);
+		return new SuccessDataResult<Account>(addedAccount, Messages.accountAdded);
 	}
 	@Override
 	public DataResult<Account> update(Account entity) {
-		try {
-			Account updatedAccount = this.accountDao.save(entity);
-			return new SuccessDataResult<Account>(updatedAccount, Messages.accountUpdated);
-		}catch(Exception e) {
-			return new ErrorDataResult<Account>(Messages.errorOccurred);
-		}
+		Account updatedAccount = this.accountDao.save(entity);
+		return new SuccessDataResult<Account>(updatedAccount, Messages.accountUpdated);
 	}
 	@Override
 	public Result delete(Account entity) {
-		try {
-			this.accountDao.delete(entity);
-			return new SuccessResult(Messages.accountDeleted);
-		}catch(Exception e) {
-			return new ErrorResult(Messages.errorOccurred);
-		}
+		this.accountDao.delete(entity);
+		return new SuccessResult(Messages.accountDeleted);
 	}
 }
