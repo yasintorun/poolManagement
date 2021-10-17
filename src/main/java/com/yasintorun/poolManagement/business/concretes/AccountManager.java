@@ -46,4 +46,12 @@ public class AccountManager implements AccountService {
 		this.accountDao.delete(entity);
 		return new SuccessResult(Messages.accountDeleted);
 	}
+	@Override
+	public DataResult<Account> getByEmail(String email) throws Exception {
+		Account account = this.accountDao.getByEmail(email);
+		if(account != null) {
+			return new SuccessDataResult<Account>(account, Messages.accountGetByEmail);			
+		}
+		return new ErrorDataResult<Account>(null, Messages.accountNotFound);
+	}
 }

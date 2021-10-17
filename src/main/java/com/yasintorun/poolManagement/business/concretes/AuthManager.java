@@ -8,11 +8,11 @@ import com.yasintorun.poolManagement.business.abstracts.AuthService;
 import com.yasintorun.poolManagement.business.abstracts.UserService;
 import com.yasintorun.poolManagement.business.constants.Messages;
 import com.yasintorun.poolManagement.core.utilities.results.DataResult;
-import com.yasintorun.poolManagement.core.utilities.results.ErrorResult;
+import com.yasintorun.poolManagement.core.utilities.results.ErrorDataResult;
 import com.yasintorun.poolManagement.core.utilities.results.Result;
+import com.yasintorun.poolManagement.core.utilities.results.SuccessDataResult;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessResult;
-import com.yasintorun.poolManagement.dataAccess.abstracts.AccountDao;
-import com.yasintorun.poolManagement.dataAccess.abstracts.UserDao;
+import com.yasintorun.poolManagement.core.utilities.security.HashingHelper;
 import com.yasintorun.poolManagement.entities.concretes.Account;
 import com.yasintorun.poolManagement.entities.concretes.User;
 import com.yasintorun.poolManagement.entities.dtos.loginDto;
@@ -30,9 +30,16 @@ public class AuthManager implements AuthService{
 	}
 
 	@Override
-	public DataResult<Account> login(loginDto loginDto) {
-		// TODO Auto-generated method stub
-		return null;
+	public DataResult<Account> login(loginDto loginDto) throws Exception {
+		DataResult<Account> accountToCheck = this.accountService.getByEmail(loginDto.getEmail());
+		if(!accountToCheck.isSuccess()) {
+			return new ErrorDataResult<Account>(Messages.emailInCorrect);
+		}
+		if(!HashingHelper.VerifyPasswordHash(loginDto.getPassword(), accountToCheck.getData().getPassword())) {
+			return new ErrorDataResult<Account>(Messages.passwordInCorrect);
+		}
+		accountToCheck.getData().setPassword(null);
+		return new SuccessDataResult<Account>(accountToCheck.getData(), Messages.loginSuccessfuly);
 	}
 
 	@Override
@@ -42,6 +49,7 @@ public class AuthManager implements AuthService{
 		accountAddResult = this.accountService.add(user.getAccount());					
 		
 		try {
+			accountAddResult.getData().setPassword(HashingHelper.CreatePasswordHash(accountAddResult.getData().getPassword()));
 			user.setAccount(accountAddResult.getData());
 			this.userService.add(user);
 		} catch(Exception e) {
