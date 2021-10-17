@@ -28,8 +28,7 @@ public class AccountManager implements AccountService {
 		try {
 			accounts = this.accountDao.findAll();
 		} catch(Exception e) {
-			//Log.logged(new Log(0, "GetAllAccount", null, Date.now(), e.getMessage()));
-			return new ErrorDataResult<List<Account>>(null, "asd");
+			return new ErrorDataResult<List<Account>>(Messages.errorOccurred);
 		}
 		return new SuccessDataResult<List<Account>>(accounts, Messages.accountListed);
 	}
