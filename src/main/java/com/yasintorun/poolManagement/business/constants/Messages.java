@@ -29,6 +29,8 @@ public class Messages {
 
 	public static String loginSuccessfuly = "Giriş başarılı";
 
+	public static String emailUsed = "Eposta zaten kayıtlı";
+
 
 
 }

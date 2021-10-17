@@ -7,6 +7,7 @@ import com.yasintorun.poolManagement.business.abstracts.AccountService;
 import com.yasintorun.poolManagement.business.abstracts.AuthService;
 import com.yasintorun.poolManagement.business.abstracts.UserService;
 import com.yasintorun.poolManagement.business.constants.Messages;
+import com.yasintorun.poolManagement.core.business.BusinessRules;
 import com.yasintorun.poolManagement.core.utilities.results.DataResult;
 import com.yasintorun.poolManagement.core.utilities.results.ErrorDataResult;
 import com.yasintorun.poolManagement.core.utilities.results.Result;
@@ -44,6 +45,11 @@ public class AuthManager implements AuthService{
 
 	@Override
 	public Result register(User user) throws Exception {
+		Result validateResult = BusinessRules.Run(this.accountService.validate(user.getAccount()), this.userService.validate(user));
+		if(validateResult != null) {
+			return validateResult;
+		}
+		
 		DataResult<Account> accountAddResult = null;
 		
 		accountAddResult = this.accountService.add(user.getAccount());					

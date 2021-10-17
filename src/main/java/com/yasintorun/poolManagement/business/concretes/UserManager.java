@@ -7,9 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.yasintorun.poolManagement.business.abstracts.UserService;
 import com.yasintorun.poolManagement.business.constants.Messages;
+import com.yasintorun.poolManagement.core.business.BusinessRules;
 import com.yasintorun.poolManagement.core.utilities.results.DataResult;
+import com.yasintorun.poolManagement.core.utilities.results.ErrorResult;
 import com.yasintorun.poolManagement.core.utilities.results.Result;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessDataResult;
+import com.yasintorun.poolManagement.core.utilities.results.SuccessResult;
 import com.yasintorun.poolManagement.dataAccess.abstracts.UserDao;
 import com.yasintorun.poolManagement.entities.concretes.User;
 
@@ -44,6 +47,22 @@ public class UserManager implements UserService {
 	public Result delete(User entity) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Result validate(User user) throws Exception {
+		Result result = BusinessRules.Run(isNull(user));
+		if(result != null) {
+			return result;
+		}
+		return new SuccessResult();
+	}
+	
+	public Result isNull(User user) {
+		if(user.getFirstname().isBlank() || user.getLastname().isBlank()) {
+			return new ErrorResult("Tüm alanlar zorunludur");
+		}
+		return new SuccessResult();
 	}
 	
 	

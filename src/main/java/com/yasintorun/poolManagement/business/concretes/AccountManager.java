@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.yasintorun.poolManagement.business.abstracts.AccountService;
 import com.yasintorun.poolManagement.business.constants.Messages;
+import com.yasintorun.poolManagement.core.business.BusinessRules;
 import com.yasintorun.poolManagement.core.utilities.results.DataResult;
 import com.yasintorun.poolManagement.core.utilities.results.ErrorDataResult;
 import com.yasintorun.poolManagement.core.utilities.results.ErrorResult;
@@ -15,7 +16,8 @@ import com.yasintorun.poolManagement.core.utilities.results.SuccessDataResult;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessResult;
 import com.yasintorun.poolManagement.dataAccess.abstracts.AccountDao;
 import com.yasintorun.poolManagement.entities.concretes.Account;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 @Service
 public class AccountManager implements AccountService {
 	private AccountDao accountDao;
@@ -53,5 +55,38 @@ public class AccountManager implements AccountService {
 			return new SuccessDataResult<Account>(account, Messages.accountGetByEmail);			
 		}
 		return new ErrorDataResult<Account>(null, Messages.accountNotFound);
+	}
+	
+	
+	
+	public Result emailCheck(String email) {
+		String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(email);
+		if(!matcher.matches()) {
+			return new ErrorResult("Email hatalı");
+		}
+		return new SuccessResult();
+	}
+	
+	public Result isNull(Account account) {
+		if(account.getEmail().isBlank() || account.getPassword().isBlank()) {
+			return new ErrorResult("Tüm alanları doldurunuz.");
+		}
+		return new SuccessResult();
+	}
+	public Result isExists(String email) {
+		if(this.accountDao.existsByEmail(email)) {
+			return new ErrorResult(Messages.emailUsed);
+		}
+		return new SuccessResult();
+	}
+	@Override
+	public Result validate(Account account) throws Exception {
+		Result result = BusinessRules.Run(isNull(account), emailCheck(account.getEmail()), isExists(account.getEmail()));
+		if(result != null) {
+			return result;
+		}
+		return new SuccessResult();
 	}
 }
