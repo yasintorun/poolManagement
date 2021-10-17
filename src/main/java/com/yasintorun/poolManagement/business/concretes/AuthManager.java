@@ -16,7 +16,7 @@ import com.yasintorun.poolManagement.core.utilities.results.SuccessResult;
 import com.yasintorun.poolManagement.core.utilities.security.HashingHelper;
 import com.yasintorun.poolManagement.entities.concretes.Account;
 import com.yasintorun.poolManagement.entities.concretes.User;
-import com.yasintorun.poolManagement.entities.dtos.loginDto;
+import com.yasintorun.poolManagement.entities.dtos.LoginDto;
 
 @Service
 public class AuthManager implements AuthService{
@@ -31,7 +31,7 @@ public class AuthManager implements AuthService{
 	}
 
 	@Override
-	public DataResult<Account> login(loginDto loginDto) throws Exception {
+	public DataResult<Account> login(LoginDto loginDto) throws Exception {
 		DataResult<Account> accountToCheck = this.accountService.getByEmail(loginDto.getEmail());
 		if(!accountToCheck.isSuccess()) {
 			return new ErrorDataResult<Account>(Messages.emailInCorrect);

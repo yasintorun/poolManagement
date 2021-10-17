@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yasintorun.poolManagement.business.abstracts.AuthService;
 import com.yasintorun.poolManagement.entities.concretes.User;
-import com.yasintorun.poolManagement.entities.dtos.loginDto;
+import com.yasintorun.poolManagement.entities.dtos.LoginDto;
 
 @RestController
 @RequestMapping("api/auth")
@@ -28,7 +28,7 @@ public class AuthController extends BaseController{
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody loginDto loginDto) {
+	public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
 		return Ok(() -> this.authService.login(loginDto));
 	}
 }
