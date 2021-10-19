@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yasintorun.poolManagement.business.abstracts.ExceptionLogService;
 import com.yasintorun.poolManagement.business.abstracts.UserService;
 import com.yasintorun.poolManagement.entities.concretes.User;
 
@@ -19,8 +20,8 @@ public class UserController extends BaseController{
 	private UserService userService;
 
 	@Autowired
-	public UserController(UserService userService) {
-		super();
+	public UserController(UserService userService, ExceptionLogService exceptionLogService) {
+		super(exceptionLogService);
 		this.userService = userService;
 	}
 	

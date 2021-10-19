@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.yasintorun.poolManagement.business.abstracts.PoolLaneService;
 import com.yasintorun.poolManagement.business.constants.Messages;
+import com.yasintorun.poolManagement.core.business.exceptions.EntityNotFound;
 import com.yasintorun.poolManagement.core.utilities.results.DataResult;
 import com.yasintorun.poolManagement.core.utilities.results.Result;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessDataResult;
@@ -38,7 +39,7 @@ public class PoolLaneManager implements PoolLaneService{
 	@Override
 	public DataResult<PoolLane> update(PoolLane entity) throws Exception {
 		if(!this.poolLaneDao.existsByLaneId(entity.getLaneId())) {
-			throw new Exception();
+			throw new EntityNotFound("poolLane");
 		}
 		PoolLane updatedLane = this.poolLaneDao.save(entity);
 		return new SuccessDataResult<PoolLane>(updatedLane, Messages.poolLaneUpdated);
@@ -47,7 +48,7 @@ public class PoolLaneManager implements PoolLaneService{
 	@Override
 	public Result delete(PoolLane entity) throws Exception {
 		if(!this.poolLaneDao.existsByLaneId(entity.getLaneId())) {
-			throw new Exception();
+			throw new EntityNotFound("poolLane");
 		}
 		
 		this.poolLaneDao.delete(entity);

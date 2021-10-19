@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yasintorun.poolManagement.business.abstracts.ExceptionLogService;
 import com.yasintorun.poolManagement.business.abstracts.PoolService;
 import com.yasintorun.poolManagement.entities.concretes.Pool;
 
@@ -19,8 +20,8 @@ public class PoolController extends BaseController{
 	private PoolService poolService;
 
 	@Autowired
-	public PoolController(PoolService poolService) {
-		super();
+	public PoolController(PoolService poolService, ExceptionLogService exceptionLogService) {
+		super(exceptionLogService);
 		this.poolService = poolService;
 	}
 

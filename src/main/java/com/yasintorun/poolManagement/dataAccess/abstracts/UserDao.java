@@ -6,4 +6,5 @@ import com.yasintorun.poolManagement.entities.concretes.User;
 
 public interface UserDao extends JpaRepository<User, Integer>{
 	User getByUserId(int userId);
+	boolean existsByUserId(int userId);
 }

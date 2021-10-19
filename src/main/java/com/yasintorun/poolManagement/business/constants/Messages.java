@@ -58,6 +58,8 @@ public class Messages {
 
 	public static String userGot = "Kullanıcı getirildi";
 
+	public static String entityNotFound = "Girilen entity değişkenine uygun veri bulunamadı";
+
 
 
 }

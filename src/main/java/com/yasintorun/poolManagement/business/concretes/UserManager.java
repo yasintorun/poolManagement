@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.yasintorun.poolManagement.business.abstracts.UserService;
 import com.yasintorun.poolManagement.business.constants.Messages;
 import com.yasintorun.poolManagement.core.business.BusinessRules;
+import com.yasintorun.poolManagement.core.business.exceptions.EntityNotFound;
 import com.yasintorun.poolManagement.core.utilities.results.DataResult;
 import com.yasintorun.poolManagement.core.utilities.results.ErrorDataResult;
 import com.yasintorun.poolManagement.core.utilities.results.ErrorResult;
@@ -45,7 +46,10 @@ public class UserManager implements UserService {
 	}
 
 	@Override
-	public Result delete(User entity) {
+	public Result delete(User entity) throws Exception {
+		if(!this.userDao.existsByUserId(entity.getUserId())) {
+			throw new EntityNotFound("user");
+		}
 		this.userDao.delete(entity);
 		return new SuccessResult(Messages.userDeleted);
 	}

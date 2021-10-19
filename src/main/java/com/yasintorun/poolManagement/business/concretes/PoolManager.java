@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.yasintorun.poolManagement.business.abstracts.PoolService;
 import com.yasintorun.poolManagement.business.constants.Messages;
+import com.yasintorun.poolManagement.core.business.exceptions.EntityNotFound;
 import com.yasintorun.poolManagement.core.utilities.results.DataResult;
 import com.yasintorun.poolManagement.core.utilities.results.ErrorDataResult;
 import com.yasintorun.poolManagement.core.utilities.results.Result;
@@ -44,7 +45,7 @@ public class PoolManager implements PoolService {
 	@Override
 	public DataResult<Pool> update(Pool entity) throws Exception {
 		if(!this.poolDao.existsByPoolId(entity.getPoolId())) {
-			throw new Exception();
+			throw new EntityNotFound("pool");
 		}
 		
 		Pool updatedPool = this.poolDao.save(entity);
@@ -54,6 +55,9 @@ public class PoolManager implements PoolService {
 
 	@Override
 	public Result delete(Pool entity) throws Exception {
+		if(!this.poolDao.existsByPoolId(entity.getPoolId())) {
+			throw new EntityNotFound("pool");
+		}
 		this.poolDao.delete(entity);
 		return new SuccessResult(Messages.poolDeleted);
 	}

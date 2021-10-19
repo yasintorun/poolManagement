@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yasintorun.poolManagement.business.abstracts.AccountService;
+import com.yasintorun.poolManagement.business.abstracts.ExceptionLogService;
 import com.yasintorun.poolManagement.entities.concretes.Account;
 import com.yasintorun.poolManagement.entities.dtos.ChangePasswordDto;
 
@@ -19,8 +20,8 @@ public class AccountController extends BaseController{
 	private AccountService accountService;
 	
 	@Autowired
-	public AccountController(AccountService accountService) {
-		super();
+	public AccountController(AccountService accountService, ExceptionLogService exceptionService) {
+		super(exceptionService);
 		this.accountService = accountService;
 	}
 	
