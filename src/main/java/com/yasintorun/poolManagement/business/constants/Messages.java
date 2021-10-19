@@ -1,6 +1,7 @@
 package com.yasintorun.poolManagement.business.constants;
 
 import com.yasintorun.poolManagement.entities.concretes.Account;
+import com.yasintorun.poolManagement.entities.concretes.User;
 
 public class Messages {
 
@@ -38,6 +39,10 @@ public class Messages {
 	public static String accountNotFind = "Böyle bir hesap yok";
 
 	public static String passwordChangeSuccessFully = "Şifre başarıyla değiştirildi";
+
+	public static String userNotFound = "Kullanıcı bulunamadı";
+
+	public static String userGot = "Kullanıcı getirildi";
 
 
 

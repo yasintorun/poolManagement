@@ -9,6 +9,7 @@ import com.yasintorun.poolManagement.business.abstracts.UserService;
 import com.yasintorun.poolManagement.business.constants.Messages;
 import com.yasintorun.poolManagement.core.business.BusinessRules;
 import com.yasintorun.poolManagement.core.utilities.results.DataResult;
+import com.yasintorun.poolManagement.core.utilities.results.ErrorDataResult;
 import com.yasintorun.poolManagement.core.utilities.results.ErrorResult;
 import com.yasintorun.poolManagement.core.utilities.results.Result;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessDataResult;
@@ -50,7 +51,7 @@ public class UserManager implements UserService {
 	}
 
 	@Override
-	public Result validate(User user) throws Exception {
+	public Result validate(User user) {
 		Result result = BusinessRules.Run(isNull(user));
 		if(result != null) {
 			return result;
@@ -63,6 +64,16 @@ public class UserManager implements UserService {
 			return new ErrorResult("Tüm alanlar zorunludur");
 		}
 		return new SuccessResult();
+	}
+
+	@Override
+	public DataResult<User> getById(int userId) {
+		User user = this.userDao.getByUserId(userId);
+		if(user == null) {
+			return new ErrorDataResult<User>(Messages.userNotFound);
+		}
+		user.getAccount().setPassword(null);
+		return new SuccessDataResult<User>(user, Messages.userGot);
 	}
 	
 	

@@ -38,4 +38,9 @@ public class UserController extends BaseController{
 	public ResponseEntity<?> update(@RequestBody User user) {
 		return Ok(() -> this.userService.update(user));
 	}
+	
+	@GetMapping("/getbyuserid")
+	public ResponseEntity<?> getById(int userId) {
+		return Ok(() -> this.userService.getById(userId));
+	}
 }
