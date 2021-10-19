@@ -9,6 +9,8 @@ public class Messages {
 
 	public static String passwordNotMatch = "Şifreler Uyuşmamaktadır";
 
+	public static String allFieldRequired = "Tüm alanlar zorunludur";
+	
 	//Global Message
 	public static String errorOccurred = "Hata Oluştu";
 	
@@ -22,9 +24,15 @@ public class Messages {
 	
 	//User message
 	public static String userAdded = "Kullanıcı eklendi";
-	public static String userListed ="Kullanıcı listelendi";
+	public static String userListed ="Kullanıcılar listelendi";
 	public static String userUpdated = "Kullanıcı güncellendi";
 	public static String userDeleted = "Kullanıcı silindi";
+	
+	//User message
+	public static String poolAdded = "Havuz eklendi";
+	public static String poolListed ="Havuzlar listelendi";
+	public static String poolUpdated = "Havuz güncellendi";
+	public static String poolDeleted = "Havuz silindi";
 
 	//Auth message
 	public static String emailInCorrect = "Eposta hatalı";
