@@ -34,6 +34,12 @@ public class Messages {
 	public static String poolUpdated = "Havuz güncellendi";
 	public static String poolDeleted = "Havuz silindi";
 	
+	//Appointment message
+	public static String appointmentAdded = "Randevu eklendi";
+	public static String appointmentListed ="Randevular listelendi";
+	public static String appointmentUpdated = "Randevu güncellendi";
+	public static String appointmentDeleted = "Randevu silindi";
+	
 	//Pool Lane message
 	public static String poolLaneAdded = "Havuz Şeridi eklendi";
 	public static String poolLaneListed ="Havuz şeritleri listelendi";
