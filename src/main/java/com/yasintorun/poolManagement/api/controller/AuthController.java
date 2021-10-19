@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yasintorun.poolManagement.business.abstracts.AuthService;
+import com.yasintorun.poolManagement.business.abstracts.ExceptionLogService;
+import com.yasintorun.poolManagement.entities.concretes.ExceptionLog;
 import com.yasintorun.poolManagement.entities.concretes.User;
 import com.yasintorun.poolManagement.entities.dtos.LoginDto;
 
@@ -17,7 +19,7 @@ public class AuthController extends BaseController{
 	private AuthService authService;
 
 	@Autowired
-	public AuthController(AuthService authService) {
+	public AuthController(AuthService authService){
 		super();
 		this.authService = authService;
 	}
