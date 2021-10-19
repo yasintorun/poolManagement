@@ -28,11 +28,17 @@ public class Messages {
 	public static String userUpdated = "Kullanıcı güncellendi";
 	public static String userDeleted = "Kullanıcı silindi";
 	
-	//User message
+	//Pool message
 	public static String poolAdded = "Havuz eklendi";
 	public static String poolListed ="Havuzlar listelendi";
 	public static String poolUpdated = "Havuz güncellendi";
 	public static String poolDeleted = "Havuz silindi";
+	
+	//Pool Lane message
+	public static String poolLaneAdded = "Havuz Şeridi eklendi";
+	public static String poolLaneListed ="Havuz şeritleri listelendi";
+	public static String poolLaneUpdated = "Havuz şeridi güncellendi";
+	public static String poolLaneDeleted = "Havuz şeridi silindi";
 
 	//Auth message
 	public static String emailInCorrect = "Eposta hatalı";
