@@ -4,6 +4,10 @@ import com.yasintorun.poolManagement.entities.concretes.Account;
 
 public class Messages {
 
+	public static String oldPasswordError = "Eski şifre hatalı";
+
+	public static String passwordNotMatch = "Şifreler Uyuşmamaktadır";
+
 	//Global Message
 	public static String errorOccurred = "Hata Oluştu";
 	
@@ -30,6 +34,10 @@ public class Messages {
 	public static String loginSuccessfuly = "Giriş başarılı";
 
 	public static String emailUsed = "Eposta zaten kayıtlı";
+
+	public static String accountNotFind = "Böyle bir hesap yok";
+
+	public static String passwordChangeSuccessFully = "Şifre başarıyla değiştirildi";
 
 
 

@@ -39,14 +39,14 @@ public class UserManager implements UserService {
 
 	@Override
 	public DataResult<User> update(User entity) {
-		// TODO Auto-generated method stub
-		return null;
+		User updateUser = this.userDao.save(entity);
+		return new SuccessDataResult<User>(updateUser, Messages.userUpdated);
 	}
 
 	@Override
 	public Result delete(User entity) {
-		// TODO Auto-generated method stub
-		return null;
+		this.userDao.delete(entity);
+		return new SuccessResult(Messages.userDeleted);
 	}
 
 	@Override

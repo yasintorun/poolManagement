@@ -1,5 +1,6 @@
 package com.yasintorun.poolManagement.business.concretes;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,11 @@ import com.yasintorun.poolManagement.core.utilities.results.ErrorResult;
 import com.yasintorun.poolManagement.core.utilities.results.Result;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessDataResult;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessResult;
+import com.yasintorun.poolManagement.core.utilities.security.HashingHelper;
 import com.yasintorun.poolManagement.dataAccess.abstracts.AccountDao;
 import com.yasintorun.poolManagement.entities.concretes.Account;
+import com.yasintorun.poolManagement.entities.dtos.ChangePasswordDto;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 @Service
@@ -88,5 +92,27 @@ public class AccountManager implements AccountService {
 			return result;
 		}
 		return new SuccessResult();
+	}
+	@Override
+	public Result changePassword(ChangePasswordDto changePasswordDto) throws Exception {
+		if(!changePasswordDto.getNewPassword().equals(changePasswordDto.getNewPasswordRepeat())) {
+			return new ErrorResult(Messages.passwordNotMatch);
+		}
+		
+		Account currentAccount = this.accountDao.getById(changePasswordDto.getAccountId());
+		
+		if(currentAccount == null) {
+			return new ErrorResult(Messages.accountNotFind);
+		}
+		
+		if(!HashingHelper.VerifyPasswordHash(changePasswordDto.getOldPassword(), currentAccount.getPassword())) {
+			return new ErrorResult(Messages.oldPasswordError);
+		}
+		
+		currentAccount.setPassword(HashingHelper.CreatePasswordHash(changePasswordDto.getNewPassword()));
+		
+		this.accountDao.save(currentAccount);
+		
+		return new SuccessResult(Messages.passwordChangeSuccessFully);	
 	}
 }
