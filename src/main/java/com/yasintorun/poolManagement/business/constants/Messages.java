@@ -1,6 +1,7 @@
 package com.yasintorun.poolManagement.business.constants;
 
 import com.yasintorun.poolManagement.entities.concretes.Account;
+import com.yasintorun.poolManagement.entities.concretes.PoolPackage;
 import com.yasintorun.poolManagement.entities.concretes.User;
 
 public class Messages {
@@ -33,6 +34,11 @@ public class Messages {
 	public static String poolListed ="Havuzlar listelendi";
 	public static String poolUpdated = "Havuz güncellendi";
 	public static String poolDeleted = "Havuz silindi";
+	//Pool Package message
+	public static String poolPackageAdded = "Havuz paketi eklendi";
+	public static String poolPackageListed ="Havuz paketleri listelendi";
+	public static String poolPackageUpdated = "Havuz paketi güncellendi";
+	public static String poolPackageDeleted = "Havuz paketi silindi";
 	
 	//Appointment message
 	public static String appointmentAdded = "Randevu eklendi";
@@ -65,6 +71,8 @@ public class Messages {
 	public static String userGot = "Kullanıcı getirildi";
 
 	public static String entityNotFound = "Girilen entity değişkenine uygun veri bulunamadı";
+
+	public static String poolPackagePriceNotLessThanZero = "Havuz paketinin fiyatı sıfırdan küçük olamaz";
 
 
 
