@@ -29,6 +29,12 @@ public class Messages {
 	public static String userUpdated = "Kullanıcı güncellendi";
 	public static String userDeleted = "Kullanıcı silindi";
 	
+	//User Package message
+	public static String userPackageAdded = "Kullanıcı paketi eklendi";
+	public static String userPackageListed ="Kullanıcı paketiler listelendi";
+	public static String userPackageUpdated = "Kullanıcı paketi güncellendi";
+	public static String userPackageDeleted = "Kullanıcı paketi silindi";
+	
 	//Pool message
 	public static String poolAdded = "Havuz eklendi";
 	public static String poolListed ="Havuzlar listelendi";
