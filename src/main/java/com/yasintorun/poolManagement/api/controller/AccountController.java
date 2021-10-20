@@ -20,8 +20,8 @@ public class AccountController extends BaseController{
 	private AccountService accountService;
 	
 	@Autowired
-	public AccountController(AccountService accountService, ExceptionLogService exceptionService) {
-		super(exceptionService);
+	public AccountController(AccountService accountService) {
+		super();
 		this.accountService = accountService;
 	}
 	

@@ -20,8 +20,8 @@ public class AppointmentController extends BaseController{
 	private AppointmentService appointmentService;
 
 	@Autowired
-	public AppointmentController(AppointmentService appointmentService, ExceptionLogService exceptionLogService) {
-		super(exceptionLogService);
+	public AppointmentController(AppointmentService appointmentService) {
+		super();
 		this.appointmentService = appointmentService;
 	}
 	

@@ -11,7 +11,7 @@ import com.yasintorun.poolManagement.core.utilities.helpers.DateHelper;
 import com.yasintorun.poolManagement.entities.concretes.ExceptionLog;
 
 public class BaseController {
-
+	@Autowired
 	private ExceptionLogService exceptionLogService;
 	
 	public BaseController() {

@@ -20,8 +20,8 @@ public class UserPackageController extends BaseController{
 	private UserPackageService userPackageService;
 
 	@Autowired
-	public UserPackageController(UserPackageService userPackageService, ExceptionLogService exceptionLogService) {
-		super(exceptionLogService);
+	public UserPackageController(UserPackageService userPackageService) {
+		super();
 		this.userPackageService = userPackageService;
 	}
 	

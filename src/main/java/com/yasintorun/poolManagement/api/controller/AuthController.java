@@ -19,8 +19,8 @@ public class AuthController extends BaseController{
 	private AuthService authService;
 
 	@Autowired
-	public AuthController(AuthService authService, ExceptionLogService exceptionLogService){
-		super(exceptionLogService);
+	public AuthController(AuthService authService){
+		super();
 		this.authService = authService;
 	}
 	

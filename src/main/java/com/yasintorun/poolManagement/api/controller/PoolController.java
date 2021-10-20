@@ -20,8 +20,8 @@ public class PoolController extends BaseController{
 	private PoolService poolService;
 
 	@Autowired
-	public PoolController(PoolService poolService, ExceptionLogService exceptionLogService) {
-		super(exceptionLogService);
+	public PoolController(PoolService poolService) {
+		super();
 		this.poolService = poolService;
 	}
 

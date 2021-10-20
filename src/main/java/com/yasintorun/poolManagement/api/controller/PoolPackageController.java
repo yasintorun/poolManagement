@@ -20,8 +20,8 @@ public class PoolPackageController extends BaseController{
 	private PoolPackageService poolPackageService;
 
 	@Autowired
-	public PoolPackageController(PoolPackageService poolPackageService, ExceptionLogService exceptionLogService) {
-		super(exceptionLogService);
+	public PoolPackageController(PoolPackageService poolPackageService) {
+		super();
 		this.poolPackageService = poolPackageService;
 	}
 	
