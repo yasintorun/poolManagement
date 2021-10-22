@@ -35,4 +35,8 @@ public class BaseController {
 			return ResponseEntity.badRequest().body(Messages.errorOccurred); //hata oluştuğunda kullanıcının göreceği mesaj
 		}
 	}
+	
+	public void ClaimControl() {
+		
+	}
 }

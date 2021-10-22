@@ -80,6 +80,8 @@ public class Messages {
 
 	public static String poolPackagePriceNotLessThanZero = "Havuz paketinin fiyatı sıfırdan küçük olamaz";
 
+	public static String operationClaimsListed = "Tüm roller listelendi";
+
 
 
 }
