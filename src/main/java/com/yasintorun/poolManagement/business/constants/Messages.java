@@ -47,7 +47,7 @@ public class Messages {
 	public static String poolPackageDeleted = "Havuz paketi silindi";
 	
 	//Appointment message
-	public static String appointmentAdded = "Randevu eklendi";
+	public static String appointmentAdded = "Randevu Oluşturuldu";
 	public static String appointmentListed ="Randevular listelendi";
 	public static String appointmentUpdated = "Randevu güncellendi";
 	public static String appointmentDeleted = "Randevu silindi";

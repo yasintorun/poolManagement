@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yasintorun.poolManagement.business.abstracts.AuthService;
+import com.yasintorun.poolManagement.core.utilities.results.DataResult;
 import com.yasintorun.poolManagement.core.utilities.security.jwt.TokenManager;
+import com.yasintorun.poolManagement.entities.concretes.Account;
 import com.yasintorun.poolManagement.entities.concretes.User;
 import com.yasintorun.poolManagement.entities.dtos.LoginDto;
 
@@ -35,20 +37,11 @@ public class AuthController extends BaseController{
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody LoginDto loginDto, @RequestHeader HttpHeaders headers) throws Exception {
-		String value = headers.getFirst(HttpHeaders.AUTHORIZATION);
-		return ResponseEntity.ok(value);
-		/*DataResult<Account> login = this.authService.login(loginDto);
+		DataResult<Account> login = this.authService.login(loginDto);
 		if(!login.isSuccess()) {
 			return ResponseEntity.badRequest().body(login);
 		}
 		//String token = tokenManager.generateToken(loginDto.getEmail());
-		return ResponseEntity.ok(null);
-		/*
-		try {
-			
-		} catch(Exception e) {
-			return ResponseEntity.badRequest().body("Giriş başarısız");
-		}*/
-		
+		return ResponseEntity.ok(login);
 	}
 }

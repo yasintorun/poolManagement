@@ -4,12 +4,14 @@ import java.util.concurrent.Callable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.yasintorun.poolManagement.business.abstracts.ExceptionLogService;
 import com.yasintorun.poolManagement.business.constants.Messages;
 import com.yasintorun.poolManagement.core.utilities.helpers.DateHelper;
 import com.yasintorun.poolManagement.entities.concretes.ExceptionLog;
 
+@CrossOrigin
 public class BaseController {
 	@Autowired
 	private ExceptionLogService exceptionLogService;

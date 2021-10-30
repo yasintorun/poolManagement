@@ -41,5 +41,9 @@ public class Appointment {
 
 	@Column(name="end_time")
 	private String endTime;
+	
+	@Column(name="date")
+	private String date;
+	
 }
 

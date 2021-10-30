@@ -19,7 +19,7 @@ public class RoleController extends BaseController{
 		this.roleService = roleService;
 	}
 	
-	@GetMapping("getalloperationclaims")
+	@GetMapping("getallroles")
 	public ResponseEntity<?> getAll() {
 		return Ok(()-> this.roleService.getAll());
 	}

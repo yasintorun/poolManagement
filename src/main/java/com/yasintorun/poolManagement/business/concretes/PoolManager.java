@@ -3,6 +3,7 @@ package com.yasintorun.poolManagement.business.concretes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.yasintorun.poolManagement.business.abstracts.PoolService;
@@ -28,7 +29,8 @@ public class PoolManager implements PoolService {
 
 	@Override
 	public DataResult<List<Pool>> getAll() throws Exception {
-		return new SuccessDataResult<List<Pool>>(this.poolDao.findAll(), Messages.poolListed);
+		Sort sort = Sort.by(Sort.Direction.ASC, "poolId");
+		return new SuccessDataResult<List<Pool>>(this.poolDao.findAll(sort), Messages.poolListed);
 	}
 
 	@Override
