@@ -58,6 +58,12 @@ public class Messages {
 	public static String poolLaneUpdated = "Havuz şeridi güncellendi";
 	public static String poolLaneDeleted = "Havuz şeridi silindi";
 
+	//Pool Lane message
+	public static String paymentAdded = "Ödeme Başarılı";
+	public static String paymentListed ="Ödeme listelendi";
+	public static String paymentUpdated = "Ödeme güncellendi";
+	public static String paymentDeleted = "Ödeme silindi";
+	
 	//Auth message
 	public static String emailInCorrect = "Eposta hatalı";
 	public static String passwordInCorrect = "Şifre hatalı";
@@ -81,6 +87,7 @@ public class Messages {
 	public static String poolPackagePriceNotLessThanZero = "Havuz paketinin fiyatı sıfırdan küçük olamaz";
 
 	public static String operationClaimsListed = "Tüm roller listelendi";
+
 
 
 

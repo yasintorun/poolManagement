@@ -5,32 +5,35 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Table(name = "payments")
 @Entity
-@Table(name = "pool_packages")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PoolPackage {
+public class Payment {
 	@Id
-	@Column(name="package_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int packageId;
+	@Column(name="payment_id")
+	private int paymentId;
 	
-	@Column(name="package_name")
-	private String packageName;
+	@Column(name="card_number")
+	private String cardNumber;
+	
+	@Column(name="amount")
+	private int amount;
 
-	@Column(name="package_price")
-	private int packagePrice;
+	@Column(name="payment_date")
+	private String paymentDate;
 	
-	@Column(name="package_period")
-	private int packagePeriod;
-	
-	@Column(name="package_type")
-	private String packageType; //Öğrenci, bireysel, aile vs.
+	@ManyToOne()
+	@JoinColumn(name="user_id")
+	private User user;
 }

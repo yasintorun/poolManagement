@@ -3,6 +3,7 @@ package com.yasintorun.poolManagement.business.concretes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.yasintorun.poolManagement.business.abstracts.PoolPackageService;
@@ -28,7 +29,8 @@ public class PoolPackageManager implements PoolPackageService{
 
 	@Override
 	public DataResult<List<PoolPackage>> getAll() throws Exception {
-		return new SuccessDataResult<List<PoolPackage>>(this.poolPackageDao.findAll(), Messages.poolPackageListed);
+		Sort sort = Sort.by(Sort.Direction.ASC, "packageId");
+		return new SuccessDataResult<List<PoolPackage>>(this.poolPackageDao.findAll(sort), Messages.poolPackageListed);
 	}
 
 	@Override
@@ -44,7 +46,7 @@ public class PoolPackageManager implements PoolPackageService{
 
 	@Override
 	public DataResult<PoolPackage> update(PoolPackage entity) throws Exception {
-		if(this.poolPackageDao.existsByPackageId(entity.getPackageId())) {
+		if(!this.poolPackageDao.existsByPackageId(entity.getPackageId())) {
 			throw new EntityNotFound("PoolPackage");
 		}
 		
@@ -59,7 +61,7 @@ public class PoolPackageManager implements PoolPackageService{
 
 	@Override
 	public Result delete(PoolPackage entity) throws Exception {
-		if(this.poolPackageDao.existsByPackageId(entity.getPackageId())) {
+		if(!this.poolPackageDao.existsByPackageId(entity.getPackageId())) {
 			throw new EntityNotFound("PoolPackage");
 		}
 		this.poolPackageDao.delete(entity);
