@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class PaymentDto {
 	private int userId;
 	private int amount;
+	private int packageId;
 	private String paymentDate;
 	private CreditCard creditCard;
 }

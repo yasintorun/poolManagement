@@ -36,4 +36,8 @@ public class Payment {
 	@ManyToOne()
 	@JoinColumn(name="user_id")
 	private User user;
+	
+	@ManyToOne()
+	@JoinColumn(name="package_id")
+	private PoolPackage poolPackage;
 }

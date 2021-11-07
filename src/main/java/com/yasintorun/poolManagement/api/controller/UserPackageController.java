@@ -45,4 +45,9 @@ public class UserPackageController extends BaseController{
 		return Ok(() -> this.userPackageService.delete(userPackage));
 	}
 	
+	@GetMapping("/getpoolpackagebyuserid")
+	public ResponseEntity<?> getByUserId(int userId) {
+		return Ok(()->this.userPackageService.getByUserId(userId));
+	}
+	
 }

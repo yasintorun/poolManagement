@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.yasintorun.poolManagement.business.abstracts.UserPackageService;
 import com.yasintorun.poolManagement.business.constants.Messages;
 import com.yasintorun.poolManagement.core.utilities.results.DataResult;
+import com.yasintorun.poolManagement.core.utilities.results.ErrorDataResult;
+import com.yasintorun.poolManagement.core.utilities.results.ErrorResult;
 import com.yasintorun.poolManagement.core.utilities.results.Result;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessDataResult;
 import com.yasintorun.poolManagement.dataAccess.abstracts.UserPackageDao;
@@ -45,5 +47,14 @@ public class UserPackageManager implements UserPackageService{
 	public Result delete(UserPackage entity) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public DataResult<UserPackage> getByUserId(int userId) {
+		UserPackage pack = this.userPackageDao.getByUser_UserId(userId);
+		if(pack == null) {
+			return new ErrorDataResult<UserPackage>("Paket bulunamadı");
+		}
+		return new SuccessDataResult<UserPackage>(pack, "Kullanıcının havuz paketi getirildi");
 	}
 }
