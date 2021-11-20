@@ -79,6 +79,16 @@ public class UserManager implements UserService {
 		user.getAccount().setPassword(null);
 		return new SuccessDataResult<User>(user, Messages.userGot);
 	}
+
+	@Override
+	public DataResult<User> getByAccountId(int accountId) throws Exception {
+		User user = this.userDao.getByAccount_AccountId(accountId);
+		if(user == null) {
+			return new ErrorDataResult<User>(Messages.userNotFound);
+		}
+		user.getAccount().setPassword(null);
+		return new SuccessDataResult<User>(user, Messages.userGot);
+	}
 	
 	
 	

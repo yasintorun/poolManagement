@@ -31,7 +31,7 @@ public class AuthManager implements AuthService{
 	}
 
 	@Override
-	public DataResult<Account> login(LoginDto loginDto) throws Exception {
+	public DataResult<?> login(LoginDto loginDto) throws Exception {
 		DataResult<Account> accountToCheck = this.accountService.getByEmail(loginDto.getEmail());
 		if(!accountToCheck.isSuccess()) {
 			return new ErrorDataResult<Account>(Messages.emailInCorrect);
@@ -40,6 +40,11 @@ public class AuthManager implements AuthService{
 			return new ErrorDataResult<Account>(Messages.passwordInCorrect);
 		}
 		accountToCheck.getData().setPassword(null);
+		
+		if(accountToCheck.getData().getRole().getRoleId() == 4) {
+			return this.userService.getByAccountId(accountToCheck.getData().getAccountId());
+		}
+		
 		return new SuccessDataResult<Account>(accountToCheck.getData(), Messages.loginSuccessfuly);
 	}
 

@@ -31,9 +31,8 @@ public class BaseController {
 			T t = call.call();
 			return ResponseEntity.ok(t);
 		}catch(Exception e) {
-			System.out.println();
+			System.out.println(e.getMessage());
 			this.exceptionLogService.log(new ExceptionLog(0, -1, e.getMessage(), DateHelper.GetDateTime()));
-			
 			return ResponseEntity.badRequest().body(Messages.errorOccurred); //hata oluştuğunda kullanıcının göreceği mesaj
 		}
 	}

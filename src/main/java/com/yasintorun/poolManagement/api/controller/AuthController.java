@@ -37,7 +37,7 @@ public class AuthController extends BaseController{
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody LoginDto loginDto, @RequestHeader HttpHeaders headers) throws Exception {
-		DataResult<Account> login = this.authService.login(loginDto);
+		DataResult<?> login = this.authService.login(loginDto);
 		if(!login.isSuccess()) {
 			return ResponseEntity.badRequest().body(login);
 		}

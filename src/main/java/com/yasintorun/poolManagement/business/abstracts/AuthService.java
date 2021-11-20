@@ -7,6 +7,6 @@ import com.yasintorun.poolManagement.entities.concretes.User;
 import com.yasintorun.poolManagement.entities.dtos.LoginDto;
 
 public interface AuthService {
-	DataResult<Account> login(LoginDto loginDto) throws Exception;
+	DataResult<?> login(LoginDto loginDto) throws Exception;
 	Result register(User user) throws Exception;
 }
