@@ -41,9 +41,9 @@ public class AuthManager implements AuthService{
 		}
 		accountToCheck.getData().setPassword(null);
 		
-		if(accountToCheck.getData().getRole().getRoleId() == 4) {
+		/*if(accountToCheck.getData().getRole().getRoleId() == 4) {
 			return this.userService.getByAccountId(accountToCheck.getData().getAccountId());
-		}
+		}*/
 		
 		return new SuccessDataResult<Account>(accountToCheck.getData(), Messages.loginSuccessfuly);
 	}
