@@ -31,6 +31,12 @@ public class PoolPackage {
 	@Column(name="package_period")
 	private int packagePeriod;
 	
+	@Column(name="package_image")
+	private String packageImage;
+	
+	@Column(name="package_color")
+	private String packageColor;
+	
 	@Column(name="package_type")
 	private String packageType; //Öğrenci, bireysel, aile vs.
 }
