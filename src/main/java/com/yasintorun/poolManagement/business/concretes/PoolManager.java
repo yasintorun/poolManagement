@@ -1,11 +1,14 @@
 package com.yasintorun.poolManagement.business.concretes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.yasintorun.poolManagement.business.abstracts.ImageService;
+import com.yasintorun.poolManagement.business.abstracts.PoolImageService;
 import com.yasintorun.poolManagement.business.abstracts.PoolService;
 import com.yasintorun.poolManagement.business.constants.Messages;
 import com.yasintorun.poolManagement.core.business.exceptions.EntityNotFound;
@@ -15,16 +18,23 @@ import com.yasintorun.poolManagement.core.utilities.results.Result;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessDataResult;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessResult;
 import com.yasintorun.poolManagement.dataAccess.abstracts.PoolDao;
+import com.yasintorun.poolManagement.entities.concretes.Image;
 import com.yasintorun.poolManagement.entities.concretes.Pool;
+import com.yasintorun.poolManagement.entities.concretes.PoolImage;
+import com.yasintorun.poolManagement.entities.dtos.PoolDto;
 
 @Service
 public class PoolManager implements PoolService {
 	private PoolDao poolDao;
+	private PoolImageService poolImageService;
+	private ImageService imageService;
 	
 	@Autowired
-	public PoolManager(PoolDao poolDao) {
+	public PoolManager(PoolDao poolDao, PoolImageService poolImageService, ImageService imageService) {
 		super();
 		this.poolDao = poolDao;
+		this.poolImageService = poolImageService;
+		this.imageService = imageService;
 	}
 
 	@Override
@@ -62,6 +72,26 @@ public class PoolManager implements PoolService {
 		}
 		this.poolDao.delete(entity);
 		return new SuccessResult(Messages.poolDeleted);
+	}
+
+	@Override
+	public DataResult<List<PoolDto>> getAllWithImages() throws Exception {
+		List<PoolDto> poolDto = new ArrayList<PoolDto>();
+		List<Pool> pools = this.getAll().getData();
+		
+		for(Pool p : pools) {
+			List<PoolImage> poolImages = this.poolImageService.getByPool_PoolId(p.getPoolId()).getData();
+			List<String> imagePaths = new ArrayList<String>();
+			
+			for(PoolImage pi : poolImages) {
+				Image image = this.imageService.getImage(pi.getImageId()).getData();
+				imagePaths.add(image.getImagePath());
+			}
+			
+			poolDto.add(new PoolDto(p, imagePaths));
+		}
+		
+		return new SuccessDataResult<List<PoolDto>>(poolDto, "Havuzlar listelendi");
 	}
 
 }

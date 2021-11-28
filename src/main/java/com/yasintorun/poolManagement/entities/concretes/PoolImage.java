@@ -5,32 +5,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Table(name = "pool_images")
 @Entity
-@Table(name = "pools")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pool {
+public class PoolImage {
 	@Id
-	@Column(name="pool_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int poolId;
+	@Column(name="id")
+	private int id;
 	
-	@Column(name="pool_name")
-	private String poolName;
+
+	@Column(name="image_id")
+	private int imageId;
 	
-	@Column(name="pool_address")
-	private String poolAddress;
-	
-	@Column(name="pool_phone")
-	private String poolPhone;
-	
-	@Column(name="pool_description")
-	private String poolDescription;
+	@ManyToOne()
+	@JoinColumn(name="pool_id")
+	private Pool pool;
 }

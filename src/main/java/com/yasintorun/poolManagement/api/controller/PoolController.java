@@ -26,9 +26,14 @@ public class PoolController extends BaseController{
 		this.poolService = poolService;
 	}
 
+	@GetMapping("getallpools2")
+	public ResponseEntity<?> getAll2() {
+		return Ok(() -> this.poolService.getAll());
+	}
+	
 	@GetMapping("getallpools")
 	public ResponseEntity<?> getAll() {
-		return Ok(() -> this.poolService.getAll());
+		return Ok(() -> this.poolService.getAllWithImages());
 	}
 	
 	@PostMapping("addpool")

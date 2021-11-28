@@ -9,8 +9,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.yasintorun.poolManagement.business.adapters.abstracts.ImageService;
 import com.yasintorun.poolManagement.core.utilities.helpers.DateHelper;
+import com.yasintorun.poolManagement.core.utilities.results.DataResult;
 import com.yasintorun.poolManagement.core.utilities.results.ErrorResult;
 import com.yasintorun.poolManagement.core.utilities.results.Result;
+import com.yasintorun.poolManagement.core.utilities.results.SuccessDataResult;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessResult;
 import com.yasintorun.poolManagement.dataAccess.abstracts.ImageDao;
 import com.yasintorun.poolManagement.entities.concretes.Image;
@@ -43,6 +45,11 @@ public class ImageManager implements com.yasintorun.poolManagement.business.abst
 			}
 		}
 		return new ErrorResult("Servis hatası");
+	}
+
+	@Override
+	public DataResult<Image> getImage(int id) throws IOException {
+		return new SuccessDataResult<Image>(this.imageDao.getById(id));
 	}
 	
 }
