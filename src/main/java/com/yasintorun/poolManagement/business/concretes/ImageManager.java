@@ -29,8 +29,8 @@ public class ImageManager implements com.yasintorun.poolManagement.business.abst
 	}
 
 	@Override
-	public Result UploadImage(MultipartFile imageFile) throws IOException {
-		Map result = imageService.upload(imageFile, "pools");
+	public Result UploadImage(MultipartFile imageFile, String folderName) throws IOException {
+		Map result = imageService.upload(imageFile, folderName);
 		if(result != null) {
 			try {
 				

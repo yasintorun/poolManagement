@@ -22,8 +22,8 @@ public class ImageController extends BaseController{
 	}
 	
 	@PostMapping("/uploadimage")
-	public ResponseEntity<?> uploadFile( MultipartFile file) {
-		return Ok(() -> this.imageService.UploadImage(file));
+	public ResponseEntity<?> uploadFile( MultipartFile file, String folderName) {
+		return Ok(() -> this.imageService.UploadImage(file, folderName));
 	}
 	
 }

@@ -9,6 +9,6 @@ import com.yasintorun.poolManagement.core.utilities.results.Result;
 import com.yasintorun.poolManagement.entities.concretes.Image;
 
 public interface ImageService{
-	public Result UploadImage(MultipartFile imageFile) throws IOException ;
+	public Result UploadImage(MultipartFile imageFile, String folderName) throws IOException ;
 	public DataResult<Image> getImage(int id) throws IOException ;
 }
