@@ -44,4 +44,9 @@ public class UserController extends BaseController{
 	public ResponseEntity<?> getById(int userId) {
 		return Ok(() -> this.userService.getById(userId));
 	}
+	
+	@GetMapping("/getbyaccountid")
+	public ResponseEntity<?> getByAuthId(int accountId) {
+		return Ok(() -> this.userService.getByAccountId(accountId));
+	}
 }
