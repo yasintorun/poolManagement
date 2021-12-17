@@ -54,6 +54,11 @@ public class AppointmentManager implements AppointmentService{
 		this.appointmentDao.delete(entity);
 		return new SuccessResult(Messages.appointmentDeleted);
 	}
+
+	@Override
+	public DataResult<List<Appointment>> getAllByUserId(int userId) throws Exception {
+		return new SuccessDataResult<List<Appointment>>(this.appointmentDao.getByUser_userId(userId), "Randevularınız listelendi");
+	}
 	
 	
 }

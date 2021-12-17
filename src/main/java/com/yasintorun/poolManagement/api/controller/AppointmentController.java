@@ -30,6 +30,11 @@ public class AppointmentController extends BaseController{
 		return Ok(() -> this.appointmentService.getAll());
 	}
 	
+	@GetMapping("/getallappointmentsbyuserid")
+	public ResponseEntity<?> getAllByUserId(int userId) {
+		return Ok(() -> this.appointmentService.getAllByUserId(userId));
+	}
+	
 	@PostMapping("/addappointment")
 	public ResponseEntity<?> add(@RequestBody Appointment appointment) {
 		return Ok(() -> this.appointmentService.add(appointment));
