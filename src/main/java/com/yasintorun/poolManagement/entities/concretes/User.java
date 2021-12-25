@@ -36,4 +36,9 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	private Account account;
+	
+	@ManyToOne
+	@JoinColumn(name = "image_id")
+	private Image image;
+	
 }

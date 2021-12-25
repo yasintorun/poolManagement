@@ -7,5 +7,6 @@ import com.yasintorun.poolManagement.entities.concretes.Message;
 
 public interface MessageService {
 	DataResult<List<Message>> getAll() throws Exception;
+	DataResult<Message> getById(int id) throws Exception;
 	DataResult<Message> sendMessage(Message entity) throws Exception;
 }

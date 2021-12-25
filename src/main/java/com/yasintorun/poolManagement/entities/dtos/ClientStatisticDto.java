@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaymentDto {
+public class ClientStatisticDto {
 	private int userId;
-	private int amount;
-	private int packageId;	
-	private String paymentDate;
-	private CreditCard creditCard;
+	private int totalAppointmentCount;
+	private int totalReamingCount;
 }

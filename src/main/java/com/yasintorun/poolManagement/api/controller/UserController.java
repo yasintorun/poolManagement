@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yasintorun.poolManagement.business.abstracts.ExceptionLogService;
 import com.yasintorun.poolManagement.business.abstracts.UserService;
@@ -48,5 +50,10 @@ public class UserController extends BaseController{
 	@GetMapping("/getbyaccountid")
 	public ResponseEntity<?> getByAuthId(int accountId) {
 		return Ok(() -> this.userService.getByAccountId(accountId));
+	}
+	
+	@PostMapping("/uploadphoto")
+	public ResponseEntity<?> uploadPhoto(@RequestBody MultipartFile file, int userId) {
+		return Ok(() -> this.userService.updateProfilePhoto(file, userId));
 	}
 }

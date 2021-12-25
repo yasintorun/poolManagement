@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.yasintorun.poolManagement.business.abstracts.ImageService;
 import com.yasintorun.poolManagement.business.abstracts.UserService;
 import com.yasintorun.poolManagement.business.constants.Messages;
 import com.yasintorun.poolManagement.core.business.BusinessRules;
@@ -16,16 +18,19 @@ import com.yasintorun.poolManagement.core.utilities.results.Result;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessDataResult;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessResult;
 import com.yasintorun.poolManagement.dataAccess.abstracts.UserDao;
+import com.yasintorun.poolManagement.entities.concretes.Image;
 import com.yasintorun.poolManagement.entities.concretes.User;
 
 @Service
 public class UserManager implements UserService {
 	private UserDao userDao;
+	private ImageService imageService;
 
 	@Autowired
-	public UserManager(UserDao userDao) {
+	public UserManager(UserDao userDao, ImageService imageService) {
 		super();
 		this.userDao = userDao;
+		this.imageService = imageService;
 	}
 
 	@Override
@@ -88,6 +93,28 @@ public class UserManager implements UserService {
 		}
 		user.getAccount().setPassword(null);
 		return new SuccessDataResult<User>(user, Messages.userGot);
+	}
+
+	@Override
+	public int totalUserCount() {
+		return this.userDao.findAll().size();
+	}
+
+	@Override
+	public Result updateProfilePhoto(MultipartFile file, int userId) throws Exception {
+		User user = this.userDao.findById(userId).get();
+		if(user == null) {
+			return new ErrorResult(Messages.userNotFound);
+		}
+		DataResult<Image> addedImage = this.imageService.UploadImage(file, "users");
+		
+		if(addedImage.isSuccess() && addedImage.getData() != null) {
+			user.setImage(addedImage.getData());
+			this.userDao.save(user);
+			return new SuccessResult("Profil Fotoğrafı Güncellendi");
+		}
+		return addedImage;
+		
 	}
 	
 	

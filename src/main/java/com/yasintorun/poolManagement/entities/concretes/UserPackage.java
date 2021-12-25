@@ -1,5 +1,7 @@
 package com.yasintorun.poolManagement.entities.concretes;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +27,10 @@ public class UserPackage {
 	private int userPackageId;
 	
 	@Column(name="created_at")
-	private String createdAt;
+	private LocalDate createdAt;
+	
+	@Column(name="status")
+	private boolean status;
 	
 	@ManyToOne()
 	@JoinColumn(name="user_id")

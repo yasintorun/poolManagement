@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yasintorun.poolManagement.business.abstracts.ImageService;
 import com.yasintorun.poolManagement.business.abstracts.PoolImageService;
@@ -14,6 +15,7 @@ import com.yasintorun.poolManagement.business.constants.Messages;
 import com.yasintorun.poolManagement.core.business.exceptions.EntityNotFound;
 import com.yasintorun.poolManagement.core.utilities.results.DataResult;
 import com.yasintorun.poolManagement.core.utilities.results.ErrorDataResult;
+import com.yasintorun.poolManagement.core.utilities.results.ErrorResult;
 import com.yasintorun.poolManagement.core.utilities.results.Result;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessDataResult;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessResult;
@@ -94,4 +96,22 @@ public class PoolManager implements PoolService {
 		return new SuccessDataResult<List<PoolDto>>(poolDto, "Havuzlar listelendi");
 	}
 
+	@Override
+	public int getPoolCount() throws Exception {
+		return this.poolDao.findAll().size();
+	}
+
+	@Override
+	public Result uploadPoolImages(MultipartFile file, int poolId) throws Exception {
+		Pool pool = this.poolDao.findById(poolId).get();
+		if(pool == null) {
+			return new ErrorResult("Havuz bulunamadı");
+		}
+		DataResult<Image> addedImage = this.imageService.UploadImage(file, "pools");
+		if(addedImage.isSuccess() && addedImage.getData() != null) {
+			poolImageService.add(new PoolImage(0, addedImage.getData().getImageId(), pool));
+			return new SuccessResult("Havuz fotoğrafı yüklendi");
+		}
+		return addedImage;
+	}
 }

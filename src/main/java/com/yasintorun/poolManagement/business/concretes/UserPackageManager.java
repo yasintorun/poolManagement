@@ -1,10 +1,13 @@
 package com.yasintorun.poolManagement.business.concretes;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.datatype.jsr310.ser.MonthDaySerializer;
 import com.yasintorun.poolManagement.business.abstracts.UserPackageService;
 import com.yasintorun.poolManagement.business.constants.Messages;
 import com.yasintorun.poolManagement.core.utilities.results.DataResult;
@@ -32,8 +35,8 @@ public class UserPackageManager implements UserPackageService{
 
 	@Override
 	public DataResult<UserPackage> add(UserPackage entity) throws Exception {
+		entity.setCreatedAt(LocalDate.now());
 		UserPackage addedUserPackage = this.userPackageDao.save(entity);
-		
 		return new SuccessDataResult<UserPackage>(addedUserPackage, Messages.userPackageAdded);
 	}
 
@@ -56,5 +59,19 @@ public class UserPackageManager implements UserPackageService{
 			return new ErrorDataResult<UserPackage>("Paket bulunamadı");
 		}
 		return new SuccessDataResult<UserPackage>(pack, "Kullanıcının havuz paketi getirildi");
+	}
+
+	@Override
+	public int totalActivePackage() {
+		return this.userPackageDao.getByStatus(true).size();
+	}
+
+	@Override
+	public int totalReamingCountByUserId(int userId) {
+		UserPackage up = this.getByUserId(userId).getData();
+		if(up == null) {
+			return 0;
+		}
+		return (int) Duration.between(up.getCreatedAt().atStartOfDay(), LocalDate.now().atStartOfDay()).toDays();
 	}
 }

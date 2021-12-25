@@ -1,5 +1,7 @@
 package com.yasintorun.poolManagement.entities.concretes;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +29,17 @@ public class Message {
 	
 	@Column(name = "subject")
 	private String subject;
+
+	@Column(name = "message")
+	private String message;
 	
 	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "is_read")
+	private boolean isRead;
+
+	@Column(name = "created_at")
+	private LocalDate createdAt;
+	
 }

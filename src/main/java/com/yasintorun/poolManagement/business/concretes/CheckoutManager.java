@@ -1,5 +1,7 @@
 package com.yasintorun.poolManagement.business.concretes;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +53,7 @@ public class CheckoutManager implements CheckoutService{
 		
 		this.paymentService.add(pay);
 		
-		UserPackage userPackage = new UserPackage(0, createdAt, pay.getUser(), pay.getPoolPackage());
+		UserPackage userPackage = new UserPackage(0, LocalDate.now(), true, pay.getUser(), pay.getPoolPackage());
 		
 		this.userPackageService.add(userPackage);
 		

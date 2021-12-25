@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.yasintorun.poolManagement.business.adapters.abstracts.ImageService;
 import com.yasintorun.poolManagement.core.utilities.helpers.DateHelper;
 import com.yasintorun.poolManagement.core.utilities.results.DataResult;
+import com.yasintorun.poolManagement.core.utilities.results.ErrorDataResult;
 import com.yasintorun.poolManagement.core.utilities.results.ErrorResult;
 import com.yasintorun.poolManagement.core.utilities.results.Result;
 import com.yasintorun.poolManagement.core.utilities.results.SuccessDataResult;
@@ -29,7 +30,7 @@ public class ImageManager implements com.yasintorun.poolManagement.business.abst
 	}
 
 	@Override
-	public Result UploadImage(MultipartFile imageFile, String folderName) throws IOException {
+	public DataResult<Image> UploadImage(MultipartFile imageFile, String folderName) throws IOException {
 		Map result = imageService.upload(imageFile, folderName);
 		if(result != null) {
 			try {
@@ -38,13 +39,13 @@ public class ImageManager implements com.yasintorun.poolManagement.business.abst
 				image.setImagePath(result.get("url").toString());
 				image.setImageName(result.get("original_filename").toString());
 				image.setCreatedAt(DateHelper.GetDateTime());
-				imageDao.save(image);
-				return new SuccessResult("Fotoğraf yüklendi");
+				var addedImage = imageDao.save(image);
+				return new SuccessDataResult<Image>(addedImage, "Fotoğraf yüklendi");
 			} catch(Exception e) {
-				return new ErrorResult("Fotoğraf yüklenirken hata oluştu");
+				return new ErrorDataResult<Image>("Fotoğraf yüklenirken hata oluştu");
 			}
 		}
-		return new ErrorResult("Servis hatası");
+		return new ErrorDataResult<Image>("Servis hatası");
 	}
 
 	@Override

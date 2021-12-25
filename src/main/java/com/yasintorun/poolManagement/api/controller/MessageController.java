@@ -21,9 +21,14 @@ public class MessageController extends BaseController {
 		this.messageService = messageService;
 	}
 	
-	@GetMapping("/getall")
-	public ResponseEntity<?> getAll(){
+	@GetMapping("/getallmessages")
+	public ResponseEntity<?> getAllMessages(){
 		return Ok(()->this.messageService.getAll());
+	}
+	
+	@GetMapping("/getmessagebyid")
+	public ResponseEntity<?> getMessageById(int id){
+		return Ok(()->this.messageService.getById(id));
 	}
 	
 	@PostMapping("/sendmessage")

@@ -68,6 +68,11 @@ public class PoolPackageManager implements PoolPackageService{
 		
 		return new SuccessResult(Messages.poolPackageDeleted);
 	}
+
+	@Override
+	public int poolPackageCount() {
+		return this.poolPackageDao.findAll().size();
+	}
 	
 	
 	

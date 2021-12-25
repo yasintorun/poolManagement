@@ -4,4 +4,6 @@ import com.yasintorun.poolManagement.entities.concretes.PoolLane;
 
 public interface PoolLaneService extends CrudService<PoolLane>{
 
+	int laneCount();
+
 }

@@ -57,5 +57,10 @@ public class PoolLaneManager implements PoolLaneService{
 		
 		return new SuccessResult(Messages.poolLaneDeleted);
 	}
+
+	@Override
+	public int laneCount() {
+		return this.poolLaneDao.findAll().size();
+	}
 	
 }

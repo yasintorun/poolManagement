@@ -39,10 +39,9 @@ public class CloudinaryImageAdapter implements ImageService{
 			file.delete();
 			return result;
 		} catch(Exception e) {
-			
+			return null;			
 		}
 		
-		return null;
 	}
 	
 }

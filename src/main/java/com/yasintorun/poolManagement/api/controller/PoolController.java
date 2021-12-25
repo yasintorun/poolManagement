@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yasintorun.poolManagement.business.abstracts.ExceptionLogService;
 import com.yasintorun.poolManagement.business.abstracts.PoolService;
@@ -49,6 +50,11 @@ public class PoolController extends BaseController{
 	@PutMapping("updatepool")
 	public ResponseEntity<?> update(@RequestBody Pool pool) {
 		return Ok(() -> this.poolService.update(pool));
+	}
+	
+	@PostMapping("/uploadpoolphoto")
+	public ResponseEntity<?> uploadPhoto(@RequestBody MultipartFile file, int poolId) {
+		return Ok(() -> this.poolService.uploadPoolImages(file, poolId));
 	}
 	
 }

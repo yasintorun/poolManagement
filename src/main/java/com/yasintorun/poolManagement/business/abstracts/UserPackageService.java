@@ -5,4 +5,6 @@ import com.yasintorun.poolManagement.entities.concretes.UserPackage;
 
 public interface UserPackageService extends CrudService<UserPackage>{
 	DataResult<UserPackage> getByUserId(int userId);
+	int totalActivePackage();
+	int totalReamingCountByUserId(int userId);
 }
