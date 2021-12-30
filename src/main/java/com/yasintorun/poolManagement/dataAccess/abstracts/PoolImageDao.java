@@ -8,4 +8,5 @@ import com.yasintorun.poolManagement.entities.concretes.PoolImage;
 
 public interface PoolImageDao extends JpaRepository<PoolImage, Integer> {
 	List<PoolImage> getByPool_PoolId(int id);
+	PoolImage getByPool_PoolIdAndImage_ImageId(int poolId, int imageId);
 }

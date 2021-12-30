@@ -83,11 +83,10 @@ public class PoolManager implements PoolService {
 		
 		for(Pool p : pools) {
 			List<PoolImage> poolImages = this.poolImageService.getByPool_PoolId(p.getPoolId()).getData();
-			List<String> imagePaths = new ArrayList<String>();
+			List<Image> imagePaths = new ArrayList<Image>();
 			
 			for(PoolImage pi : poolImages) {
-				Image image = this.imageService.getImage(pi.getImageId()).getData();
-				imagePaths.add(image.getImagePath());
+				imagePaths.add(pi.getImage());
 			}
 			
 			poolDto.add(new PoolDto(p, imagePaths));
@@ -109,9 +108,21 @@ public class PoolManager implements PoolService {
 		}
 		DataResult<Image> addedImage = this.imageService.UploadImage(file, "pools");
 		if(addedImage.isSuccess() && addedImage.getData() != null) {
-			poolImageService.add(new PoolImage(0, addedImage.getData().getImageId(), pool));
+			poolImageService.add(new PoolImage(0, addedImage.getData(), pool));
 			return new SuccessResult("Havuz fotoğrafı yüklendi");
 		}
 		return addedImage;
+	}
+
+	@Override
+	public Result deletePoolImage(int poolId, int imageId) throws Exception {
+		Pool pool = this.poolDao.findById(poolId).get();
+		PoolImage pi = this.poolImageService.getByPoolIdAndImageId(poolId, imageId).getData();
+		if(pool == null || pi == null) {
+			return new ErrorResult("Hata Oluştu..");
+		}
+		this.poolImageService.delete(pi);
+		this.imageService.deleteImage(imageId);
+		return new SuccessResult("Havuz fotoğrafı silindi");
 	}
 }

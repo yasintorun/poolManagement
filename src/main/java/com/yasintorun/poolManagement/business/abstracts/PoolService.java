@@ -13,4 +13,5 @@ public interface PoolService extends CrudService<Pool> {
 	DataResult<List<PoolDto>> getAllWithImages() throws Exception;
 	int getPoolCount() throws Exception;
 	Result uploadPoolImages(MultipartFile file, int poolId) throws Exception;
+	Result deletePoolImage(int poolId, int imageId)throws Exception;
 }

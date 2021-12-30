@@ -60,8 +60,6 @@ public class AccountManager implements AccountService {
 		return new ErrorDataResult<Account>(null, Messages.accountNotFound);
 	}
 	
-	
-	
 	public Result emailCheck(String email) {
 		String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 		Pattern pattern = Pattern.compile(regex);

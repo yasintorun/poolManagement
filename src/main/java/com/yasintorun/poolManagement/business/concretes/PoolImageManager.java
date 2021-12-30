@@ -55,4 +55,10 @@ public class PoolImageManager implements PoolImageService{
 		(this.poolImageDao.getByPool_PoolId(id), "Havuza göre fotoğraflar listelendi");
 	}
 
+	@Override
+	public DataResult<PoolImage> getByPoolIdAndImageId(int poolId, int imageId) {
+		return new SuccessDataResult<PoolImage>
+		(this.poolImageDao.getByPool_PoolIdAndImage_ImageId(poolId, imageId));
+	}
+
 }

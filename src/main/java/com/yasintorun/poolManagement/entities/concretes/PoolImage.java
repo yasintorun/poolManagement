@@ -24,9 +24,9 @@ public class PoolImage {
 	@Column(name="id")
 	private int id;
 	
-
-	@Column(name="image_id")
-	private int imageId;
+	@ManyToOne()
+	@JoinColumn(name="image_id")
+	private Image image;
 	
 	@ManyToOne()
 	@JoinColumn(name="pool_id")

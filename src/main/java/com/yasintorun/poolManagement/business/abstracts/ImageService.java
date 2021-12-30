@@ -11,4 +11,5 @@ import com.yasintorun.poolManagement.entities.concretes.Image;
 public interface ImageService{
 	public DataResult<Image> UploadImage(MultipartFile imageFile, String folderName) throws IOException;
 	public DataResult<Image> getImage(int id) throws IOException;
+	public Result deleteImage(int imageId) throws Exception;
 }

@@ -52,5 +52,11 @@ public class ImageManager implements com.yasintorun.poolManagement.business.abst
 	public DataResult<Image> getImage(int id) throws IOException {
 		return new SuccessDataResult<Image>(this.imageDao.getById(id));
 	}
+
+	@Override
+	public Result deleteImage(int imageId) throws Exception {
+		this.imageDao.deleteById(imageId);
+		return new SuccessResult("Fotoğraf silindi");
+	}
 	
 }

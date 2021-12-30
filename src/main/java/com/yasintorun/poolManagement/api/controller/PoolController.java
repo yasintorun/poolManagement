@@ -57,4 +57,9 @@ public class PoolController extends BaseController{
 		return Ok(() -> this.poolService.uploadPoolImages(file, poolId));
 	}
 	
+	@GetMapping("/deletepoolphoto")
+	public ResponseEntity<?> deletePhoto(int poolId, int imageId) {
+		return Ok(() -> this.poolService.deletePoolImage(poolId, imageId));
+	}
+	
 }
